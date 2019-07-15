@@ -13,7 +13,6 @@
 #' @details The technique used is non-linear least squares, so the sum of the squared residuals is minimized.
 #'
 #' @seealso \code{\link{estimateCutoff}}
-#' @import truncnorm
 #' @importFrom stats coefficients qnorm nls nls.control
 findDistr <- function(df, startParams, fit, q){
   # check input:

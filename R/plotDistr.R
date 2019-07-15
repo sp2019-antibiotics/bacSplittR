@@ -22,7 +22,7 @@ plotDistr <- function(m,startP,DF){
   best <- which.min(m[,5]) #= estimate for the cutoff
   diam <- obs <- NULL #for package, otherwise Note, because variables are undefined
   if(best==1){
-    ggplot2::ggplot()+
+    ggplot()+
       geom_col(data=DF,mapping=aes(x=diam,y=obs))+ #use for i = 1
       geom_line(mapping=aes(x=seq(min(DF$diam),max(DF$diam),by=0.2),y=dnorm(seq(min(DF$diam),max(DF$diam),by=0.2),startP[1],startP[2])*startP[3],colour="Starting Distribution"), linetype="dashed", size=1)+
       geom_line(mapping=aes(x=seq(min(DF$diam),max(DF$diam),by=0.2),y=dnorm(seq(min(DF$diam),max(DF$diam),by=0.2),m[,2][best],m[,3][best])*m[,4][best],colour="Fitted Distribution"), size=1)+
@@ -33,7 +33,7 @@ plotDistr <- function(m,startP,DF){
       ylab("Observed Bacteria") +
       xlab("Zone Diameter")
   }else{
-    ggplot2::ggplot()+
+    ggplot()+
       geom_col(data=DF[-(1:(best-1)),],mapping=aes(x=diam,y=obs))+
       geom_col(data=DF[1:(best-1),],mapping=aes(x=diam,y=obs), fill="gray")+
       geom_line(mapping=aes(x=seq(min(DF$diam),max(DF$diam),by=0.2),y=dnorm(seq(min(DF$diam),max(DF$diam),by=0.2),startP[1],startP[2])*startP[3],colour="Starting Distribution"), linetype="dashed", size=1)+

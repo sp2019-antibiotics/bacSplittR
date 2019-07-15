@@ -39,7 +39,6 @@
 #'
 #' @export
 #'
-#' @import rvest stringr xml2
 #' @importFrom utils write.csv2
 
 

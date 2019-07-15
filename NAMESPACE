@@ -2,12 +2,7 @@
 
 export(estimateCutoff)
 export(scrapeBacteria)
-import(Hmisc)
 import(ggplot2)
-import(rvest)
-import(stringr)
-import(truncnorm)
-import(xml2)
 importFrom(stats,coefficients)
 importFrom(stats,density)
 importFrom(stats,dnorm)

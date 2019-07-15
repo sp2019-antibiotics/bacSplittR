@@ -9,7 +9,6 @@
 #' @return The function \code{startParameters} returns a numeric vector of estimated start parameters for mean, sd and n.
 #'
 #' @seealso \code{\link{estimateCutoff}}
-#' @import Hmisc
 #' @importFrom stats density weighted.mean
 
 startParameters <- function(DF, spMean="mean"){
