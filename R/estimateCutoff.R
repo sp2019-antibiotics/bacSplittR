@@ -36,7 +36,7 @@
 #' Here, the default value is "n_ab", which is also used in the original algorithm for MIC data.
 #'
 #' @examples
-#' data(ZD) #load data
+#' data("ZD", package = "EUCASTData") #load data
 #' observations <- as.numeric(ZD[706,4:48])
 #' estimateCutoff(observations, start = "peak1", fit = "n_abs", plot=TRUE)
 #'

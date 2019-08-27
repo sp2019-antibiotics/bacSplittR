@@ -4,15 +4,12 @@ Title: Analysis of Antibiotic Resistance Data
 Author: Michaela Berndl, Klara Hultsch, Andreas Koppenberger, Doris Kuttner, Marilena Plank
 Version: 0.1.0
 Maintainer: JKU Students <gabriele.mack-niederleitner@jku.at>
-Description: This package includes a data set for minimal inhibitory concentration ('MIC') and inhibition zone diameters ('ZD'). 
-  Furthermore, a web scraping function is provided to generate the data sets directly from the homepage EUCAST.
-  EcoffinR also contains an algorithm designed to find the Epidemiological Cutoff Value (ECOFF) of pairings of bacteria and antibiotics. 
-  Its use is to split bacteria into a resistant and a sensitive group for each antibiotic. 
+Description: Contains an algorithm designed to find the Epidemiological Cutoff Value (ECOFF) of pairings of bacteria and antibiotics. 
+  It splits bacteria into a resistant and a sensitive group for each antibiotic. 
   A normal distribution is used to estimate the ECOFF from ZD. 
 License: GPL-2
-URL: http://www.eucast.org/
 Encoding: UTF-8
-LazyData: true
 RoxygenNote: 6.1.1
-Imports: truncnorm, ggplot2, rvest, stringr, stats, Hmisc, xml2
+Imports: truncnorm, ggplot2, stats, utils, Hmisc
+Suggests: EUCASTData
 
