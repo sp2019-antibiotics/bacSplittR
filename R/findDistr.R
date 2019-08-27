@@ -30,7 +30,7 @@ findDistr <- function(df, startParams, fit, q){
 
   # estimate cutoff:
   e <- ifelse(class(M)=="nls",qnorm(q,coefficients(M)[1], coefficients(M)[2]),NA)
-  if(!is.na(e)& e<(min(df$diam)-0.5)) e <- NA
+  # if(!is.na(e)& e<(min(df$diam)-0.5)) e <- NA
 
   # estimated coefficients:
   ifelse(class(M)=="nls",est <- c(coefficients(M)[1], coefficients(M)[2], coefficients(M)[3]),est <- c(NA,NA,NA))
