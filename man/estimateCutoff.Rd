@@ -53,6 +53,15 @@ Here, the default value is "n_ab", which is also used in the original algorithm 
 data("ZD", package = "EUCASTData") #load data
 observations <- as.numeric(ZD[706,4:48])
 estimateCutoff(observations, start = "peak1", fit = "n_abs", plot=TRUE)
+example1 <- as.numeric(subset(ZD, Antimicrobial == "Ampicillin" & Bacterium == "Escherichia coli",
+  grepl("^Z", colnames(ZD))))
+estimateCutoff(example1, start = "peak1", fit = "n_abs", plot=TRUE)
+example2 <- as.numeric(subset(ZD, Antimicrobial == "Piperacillin" & Bacterium == "Escherichia coli",
+  grepl("^Z", colnames(ZD))))
+estimateCutoff(example2, start = "peak1", fit = "n_abs", plot=TRUE)
+example3 <- as.numeric(subset(ZD, Antimicrobial == "Mecillinam" & Bacterium == "Escherichia coli",
+  grepl("^Z", colnames(ZD))))
+estimateCutoff(example3, start = "peak1", fit = "n_abs", plot=TRUE)
 
 }
 \references{

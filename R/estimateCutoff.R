@@ -39,6 +39,15 @@
 #' data("ZD", package = "EUCASTData") #load data
 #' observations <- as.numeric(ZD[706,4:48])
 #' estimateCutoff(observations, start = "peak1", fit = "n_abs", plot=TRUE)
+#' example1 <- as.numeric(subset(ZD, Antimicrobial == "Ampicillin" & Bacterium == "Escherichia coli",
+#'   grepl("^Z", colnames(ZD))))
+#' estimateCutoff(example1, start = "peak1", fit = "n_abs", plot=TRUE)
+#' example2 <- as.numeric(subset(ZD, Antimicrobial == "Piperacillin" & Bacterium == "Escherichia coli",
+#'   grepl("^Z", colnames(ZD))))
+#' estimateCutoff(example2, start = "peak1", fit = "n_abs", plot=TRUE)
+#' example3 <- as.numeric(subset(ZD, Antimicrobial == "Mecillinam" & Bacterium == "Escherichia coli",
+#'   grepl("^Z", colnames(ZD))))
+#' estimateCutoff(example3, start = "peak1", fit = "n_abs", plot=TRUE)
 #'
 #' @references Turnidge, J., Kahlmeter, G., Kronvall, G. (2006) Statistical characterization of
 #'   bacterial wild-type MIC value distributions and the determination of
@@ -57,11 +66,11 @@ estimateCutoff <- function(
   plot = FALSE          #should a plot be drawn
 ){
   # check input
-  stopifnot(length(obs)==length(diam) &
-              start %in% c("mean", "peak1") &
-              fit %in% c("Pmean", "Psd", "Pn", "n_abs", "sigma")&
-              q>0 & q<1 &
-              is.logical(plot))
+  stopifnot(length(obs)==length(diam),
+            start %in% c("mean", "peak1"),
+            fit %in% c("Pmean", "Psd", "Pn", "n_abs", "sigma"),
+            is.numeric(q), length(q) == 1, q>0 & q<1,
+            is.logical(plot))
   # generate dataframe with all necessary data
   DF <- data.frame(obs=obs, diam=diam, lower=diam-0.5)
   DF$s <- rev(cumsum(rev(obs)))
@@ -76,12 +85,10 @@ estimateCutoff <- function(
 
   # compute all possible ecoffs and their fitting parameter:
   for(i in 1:imax){
-    m[i,] <- findDistr(DF,startParams=startP, fit =fit, q=q)
-    DF <- DF[-1,]
+    m[i,] <- findDistr(DF[i:nrow(DF),], startParams=startP, fit =fit, q=q)
   }
 
   # plot:
-  DF <- data.frame(obs=obs, diam=diam) # reset data frame for plotting
   if(plot & any(!is.na(m[,1]))) print(plotDistr(m, startP,DF))
 
   #return estimated cutoff value from best fit

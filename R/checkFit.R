@@ -25,13 +25,17 @@
 
 checkFit <- function(M, fit,N){ #M ...  nls object
   # check input:
-  stopifnot(fit %in% c("n_abs", "Pmean", "Psd", "Pn", "sigma") & is.numeric(N) & N>0)
+  stopifnot(fit %in% c("n_abs", "Pmean", "Psd", "Pn", "sigma"), is.numeric(N), length(N) == 1, N>0)
   # choose measure corresponding to fit parameter:
-  tryCatch(
-  if(class(M)!="nls")return(NA)
-  else if(class(M)=="nls" & fit == "Pmean")return( summary(M)$coefficients[1,4])
-  else if(class(M)=="nls" & fit == "Psd")return( summary(M)$coefficients[2,4])
-  else if(class(M)=="nls" & fit == "Pn")return( summary(M)$coefficients[3,4])
-  else if(class(M)=="nls" & fit == "n_abs")return(abs(coefficients(M)[3]-N))
-  else if(class(M)=="nls" & fit == "sigma")return(summary(M)$sigma))
+  if (!is(M, "nls")) {
+      result <- NA
+  } else {
+      result <- switch(fit,
+                       Pmean = summary(M)$coefficients[1, 4],
+                       Psd = summary(M)$coefficients[2, 4],
+                       Pn = summary(M)$coefficients[3, 4],
+                       n_abs = abs(coefficients(M)[3] - N),
+                       sigma = summary(M)$sigma)
+  }
+  result
 }

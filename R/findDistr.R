@@ -17,10 +17,10 @@
 findDistr <- function(df, startParams, fit, q){
   # check input:
   stopifnot(
-   is.numeric(df$diam) & is.numeric(df$s)
-   & is.numeric(startParams) & length(startParams)==3
-   & fit %in% c("n_abs", "Pmean", "Psd", "Pn", "sigma")
-   & is.numeric(q) & q>0 & q<1
+   is.numeric(df$diam), is.numeric(df$s),
+   is.numeric(startParams), length(startParams)==3,
+   fit %in% c("n_abs", "Pmean", "Psd", "Pn", "sigma"),
+   is.numeric(q), length(q) == 1, q>0 & q<1
   )
   # fit n-fold multiple of truncated normal survival function:
   M <- tryCatch(
@@ -29,11 +29,11 @@ findDistr <- function(df, startParams, fit, q){
     ,error=function(e){NA})
 
   # estimate cutoff:
-  e <- ifelse(class(M)=="nls",qnorm(q,coefficients(M)[1], coefficients(M)[2]),NA)
+  e <- if (is(M, "nls")) qnorm(q,coefficients(M)[1], coefficients(M)[2]) else NA
   # if(!is.na(e)& e<(min(df$diam)-0.5)) e <- NA
 
   # estimated coefficients:
-  ifelse(class(M)=="nls",est <- c(coefficients(M)[1], coefficients(M)[2], coefficients(M)[3]),est <- c(NA,NA,NA))
+  est <- if (is(M, "nls")) coefficients(M)[1:3] else c(NA, NA, NA)
 
   # calculate fit measurement
   g <-  checkFit(M,fit,max(df$s))

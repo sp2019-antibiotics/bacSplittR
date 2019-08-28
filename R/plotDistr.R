@@ -15,9 +15,9 @@
 plotDistr <- function(m,startP,DF){
   # check input
   stopifnot(
-    is.matrix(m) & is.numeric(m) & ncol(m)==5 & nrow(m)>=1
-    & is.numeric(startP) & length(startP)==3
-    & is.numeric(DF$diam) & is.numeric(DF$obs))
+    is.matrix(m), is.numeric(m), ncol(m)==5, nrow(m)>=1,
+    is.numeric(startP), length(startP)==3,
+    is.numeric(DF$diam), is.numeric(DF$obs))
 
   best <- which.min(m[,5]) #= estimate for the cutoff
   diam <- obs <- NULL #for package, otherwise Note, because variables are undefined
