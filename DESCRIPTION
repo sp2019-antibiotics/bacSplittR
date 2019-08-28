@@ -10,6 +10,6 @@ Description: Contains an algorithm designed to find the Epidemiological Cutoff V
 License: GPL-2
 Encoding: UTF-8
 RoxygenNote: 6.1.1
-Imports: truncnorm, ggplot2, stats, utils, Hmisc
+Imports: truncnorm, ggplot2, methods, stats, utils, Hmisc
 Suggests: EUCASTData
 

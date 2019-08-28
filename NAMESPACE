@@ -2,6 +2,7 @@
 
 export(estimateCutoff)
 import(ggplot2)
+importFrom(methods,is)
 importFrom(stats,coefficients)
 importFrom(stats,density)
 importFrom(stats,dnorm)

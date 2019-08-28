@@ -21,7 +21,7 @@
 #'
 #' @seealso \code{\link{estimateCutoff}}
 #' @importFrom stats nls nls.control coefficients
-
+#' @importFrom methods is
 
 checkFit <- function(M, fit,N){ #M ...  nls object
   # check input:

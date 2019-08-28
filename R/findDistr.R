@@ -14,6 +14,8 @@
 #'
 #' @seealso \code{\link{estimateCutoff}}
 #' @importFrom stats coefficients qnorm nls nls.control
+#' @importFrom methods is
+
 findDistr <- function(df, startParams, fit, q){
   # check input:
   stopifnot(
