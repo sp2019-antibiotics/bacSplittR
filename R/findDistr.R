@@ -24,11 +24,11 @@ findDistr <- function(df, startParams, fit, q){
    fit %in% c("n_abs", "Pmean", "Psd", "Pn", "sigma"),
    is.numeric(q), length(q) == 1, q>0 & q<1
   )
-  # fit n-fold multiple of truncated normal survival function:
+  # fit n-fold multiple of normal survival function:
   M <- tryCatch(
-    nls(s~n*(1 - truncnorm::ptruncnorm(lower,a = min(df$diam),b=Inf, mean=mean, sd=sd)), data=df, start=startParams,
-        lower=c(min(df$diam),0,0), algorithm="port", control=nls.control(maxiter=10000))
-    ,error=function(e){NA})
+      nls(s~n * pnorm(lower, mean=mean, sd=sd, lower.tail = FALSE), data=df, start=startParams,
+          lower=c(min(df$diam),0,0), algorithm="port", control=nls.control(maxiter=10000)),
+      error=function(e){NA})
 
   # estimate cutoff:
   e <- if (is(M, "nls")) qnorm(q,coefficients(M)[1], coefficients(M)[2]) else NA
